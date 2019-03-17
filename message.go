@@ -26,7 +26,11 @@ func (m Message) SendClosed() {
 }
 
 func (m Message) SendForgot() {
-    m.sendMessage("Sefe Left Open")
+    m.sendMessage("Safe Left Open")
+}
+
+func (m Message) Heartbeat() {
+    m.sendMessage("Safe Heartbeat")
 }
 
 // https://app.mailjet.com/transactional/sendapi
