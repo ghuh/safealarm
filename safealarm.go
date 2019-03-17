@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"log"
+	"os"
 )
 
 // https://www.golang-book.com/books/intro
@@ -10,9 +10,7 @@ import (
 func main() {
     log.Print("STARTING")
 
-    var configFile string
-	flag.StringVar(&configFile,"CONFIG_FILE", "", "Config file path")
-
+    configFile := os.Args[1]
     config := NewConfiguration(configFile)
 
     message := NewMessage(config)

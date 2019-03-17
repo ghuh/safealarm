@@ -65,3 +65,6 @@ out
 .settings
 .classpath
 .project
+
+#Safe Alarm
+config.yaml

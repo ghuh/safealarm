@@ -1,9 +1,6 @@
 package main
 
-import (
-    "fmt"
-    "github.com/mailjet/mailjet-apiv3-go"
-)
+import "log"
 
 // https://icyapril.com/go/programming/2017/12/17/object-orientation-in-go.html
 
@@ -30,6 +27,8 @@ func (m Message) SendForgot() {
 
 // https://app.mailjet.com/transactional/sendapi
 func (m Message) sendMessage(message string) {
+	log.Printf("message: %v", message)
+    /*
     mailjetClient := mailjet.NewMailjetClient(m.config.MJ.publicApiKey, m.config.MJ.privateApiKey)
     email := &mailjet.InfoSendMail {
       FromEmail: "kphayen@gmail.com",
@@ -49,4 +48,5 @@ func (m Message) sendMessage(message string) {
             fmt.Println("Success")
             fmt.Println(res)
     }
+    */
 }
