@@ -1,0 +1,67 @@
+# Xcode
+!**/*.xcodeproj
+!**/*.pbxproj
+!**/*.xcworkspacedata
+!**/*.xcsettings
+!**/*.xcscheme
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
+
+# OS X
+.DS_Store
+
+# Android
+local.properties
+
+# Node.js
+*.log
+.nvm
+node/
+
+# BUCK
+buck-out/
+\.buckd/
+android/app/libs
+android/keystores/debug.keystore
+
+# Vim temp files
+*.swp
+
+# Datastore, indexes, and blobstore for the Google App Engine dev server and unit test server
+appengine-generated/
+
+# Intellij
+.idea
+*.iml
+
+# Java
+target/
+.gradle
+
+# Crashlytics
+com_crashlytics_export_strings.xml
+crashlytics-build.properties
+
+# Other
+datanucleus.log
+out
+*.ipr
+*.iws
+.settings
+.classpath
+.project
