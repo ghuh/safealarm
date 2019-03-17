@@ -1,8 +1,12 @@
 package main
 
-import "log"
+import (
+    "github.com/mailjet/mailjet-apiv3-go"
+    "log"
+)
 
 // https://icyapril.com/go/programming/2017/12/17/object-orientation-in-go.html
+// For Verizon, send  to <number>@vtext.com to text a phone number
 
 type Message struct {
     config Config
@@ -27,26 +31,32 @@ func (m Message) SendForgot() {
 
 // https://app.mailjet.com/transactional/sendapi
 func (m Message) sendMessage(message string) {
-	log.Printf("message: %v", message)
-    /*
-    mailjetClient := mailjet.NewMailjetClient(m.config.MJ.publicApiKey, m.config.MJ.privateApiKey)
+	log.Printf("Sending message [ %v ]", message)
+
+	// https://stackoverflow.com/a/38362784/10788820
+    recipients := make([]mailjet.Recipient, len(m.config.targetEmails))
+    for index, _ := range m.config.targetEmails {
+        recipients[index] = mailjet.Recipient{
+            Email: m.config.targetEmails[index],
+        }
+    }
+
     email := &mailjet.InfoSendMail {
       FromEmail: "kphayen@gmail.com",
       FromName: "Kevin Hayen",
       Subject: "",
       TextPart: message,
-      Recipients: []mailjet.Recipient {
-        mailjet.Recipient {
-          Email: "7342553145@vtext.com",
-        },
-      },
+      Recipients: recipients,
     }
+
+    mailjetClient := mailjet.NewMailjetClient(m.config.MJ.publicApiKey, m.config.MJ.privateApiKey)
+
+    /* TODO
     res, err := mailjetClient.SendMail(email)
     if err != nil {
-            fmt.Println(err)
+		log.Printf("Error sending message: %v", err)
     } else {
-            fmt.Println("Success")
-            fmt.Println(res)
+        log.Printf("Successfully sent message: %v", res)
     }
     */
 }

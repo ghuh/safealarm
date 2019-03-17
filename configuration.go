@@ -10,6 +10,7 @@ import (
 // https://stackoverflow.com/questions/28682439/go-parse-yaml-file
 
 type Config struct {
+	targetEmails []string
 	MJ struct {
 		publicApiKey string
 		privateApiKey string
@@ -18,7 +19,6 @@ type Config struct {
 
 func NewConfiguration(configFilePath string) Config {
 	config := getConfigObject(getYamlFileContents(configFilePath))
-
 
 	fmt.Printf("Configuration:\n%v\n\n", config)
 
@@ -39,7 +39,7 @@ func getYamlFileContents(configFilePath string) []byte {
 func getConfigObject(configFileContents []byte) Config {
 	config := Config{}
 
-	err := yaml.Unmarshal([]byte(configFileContents), &config)
+	err := yaml.Unmarshal(configFileContents, &config)
 
 	if err != nil {
 		log.Fatalf("Error parsing config file YAML: %v", err)
