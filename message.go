@@ -34,7 +34,7 @@ func (m Message) Heartbeat() {
 
 // https://app.mailjet.com/transactional/sendapi
 func (m Message) sendMessage(message string) {
-	log.Printf("Sending message [ %v ]", message)
+    log.Printf("Sending message [ %v ]", message)
 
     /* TODO
     // https://stackoverflow.com/a/38362784/10788820
@@ -58,7 +58,7 @@ func (m Message) sendMessage(message string) {
 
     res, err := mailjetClient.SendMail(email)
     if err != nil {
-		log.Printf("Error sending message: %v", err)
+        log.Printf("Error sending message: %v", err)
     } else {
         log.Printf("Successfully sent message: %v", res)
     }

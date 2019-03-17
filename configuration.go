@@ -1,48 +1,48 @@
 package main
 
 import (
-	"gopkg.in/yaml.v2"
-	"io/ioutil"
-	"log"
+    "gopkg.in/yaml.v2"
+    "io/ioutil"
+    "log"
 )
 
 // https://stackoverflow.com/questions/28682439/go-parse-yaml-file
 
 type Config struct {
-	targetEmails []string
-	MJ struct {
-		publicApiKey string
-		privateApiKey string
-	}
+    targetEmails []string
+    MJ struct {
+    	publicApiKey string
+    	privateApiKey string
+    }
 }
 
 func NewConfiguration(configFilePath string) Config {
-	config := getConfigObject(getYamlFileContents(configFilePath))
+    config := getConfigObject(getYamlFileContents(configFilePath))
 
-	log.Printf("Configuration:\n%v\n\n", config)
+    log.Printf("Configuration:\n%v\n\n", config)
 
-	return config
+    return config
 }
 
 func getYamlFileContents(configFilePath string) []byte {
-	yamlFileContents, err := ioutil.ReadFile(configFilePath)
+    yamlFileContents, err := ioutil.ReadFile(configFilePath)
 
-	if err != nil {
-		log.Fatalf("Error opening config file '%v': %v", configFilePath, err)
-		panic(err)
-	}
+    if err != nil {
+    	log.Fatalf("Error opening config file '%v': %v", configFilePath, err)
+    	panic(err)
+    }
 
-	return yamlFileContents;
+    return yamlFileContents;
 }
 
 func getConfigObject(configFileContents []byte) Config {
-	config := Config{}
+    config := Config{}
 
-	err := yaml.Unmarshal(configFileContents, &config)
+    err := yaml.Unmarshal(configFileContents, &config)
 
-	if err != nil {
-		log.Fatalf("Error parsing config file YAML: %v", err)
-	}
+    if err != nil {
+    	log.Fatalf("Error parsing config file YAML: %v", err)
+    }
 
-	return config
+    return config
 }
