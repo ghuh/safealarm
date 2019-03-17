@@ -37,8 +37,9 @@ func (m Message) sendMessage(message string) {
 	log.Printf("Sending message [ %v ]", message)
 
     /* TODO
-	// https://stackoverflow.com/a/38362784/10788820
+    // https://stackoverflow.com/a/38362784/10788820
     recipients := make([]mailjet.Recipient, len(m.config.targetEmails))
+    // https://stackoverflow.com/a/7782507/10788820
     for index, _ := range m.config.targetEmails {
         recipients[index] = mailjet.Recipient{
             Email: m.config.targetEmails[index],
