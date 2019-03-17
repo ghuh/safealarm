@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
@@ -20,7 +19,7 @@ type Config struct {
 func NewConfiguration(configFilePath string) Config {
 	config := getConfigObject(getYamlFileContents(configFilePath))
 
-	fmt.Printf("Configuration:\n%v\n\n", config)
+	log.Printf("Configuration:\n%v\n\n", config)
 
 	return config
 }
