@@ -54,7 +54,7 @@ func (m Message) sendMessage(message string) {
       Recipients: recipients,
     }
 
-    mailjetClient := mailjet.NewMailjetClient(m.config.MJ.publicApiKey, m.config.MJ.privateApiKey)
+    mailjetClient := mailjet.NewMailjetClient(m.config.Mailjet.publicApiKey, m.config.Mailjet.privateApiKey)
 
     res, err := mailjetClient.SendMail(email)
     if err != nil {

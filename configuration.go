@@ -10,7 +10,7 @@ import (
 
 type Config struct {
     targetEmails []string
-    MJ struct {
+    Mailjet struct {
     	publicApiKey string
     	privateApiKey string
     }
