@@ -7,7 +7,8 @@ import (
 )
 
 // Raspberry Pi Model A pin guide: https://pi4j.com/1.2/pins/model-a-rev2.html
-// Pin 22 mapping in code: https://github.com/stianeikeland/go-rpio/blob/master/rpio.go#L49
+// Wire to 3.3 VDC Power and GPIO3 on P1 Pinout (26-pin Header)
+
 // https://github.com/stianeikeland/go-rpio/blob/master/examples/event/event.go
 
 type DoorSensor struct {
