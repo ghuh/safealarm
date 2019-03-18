@@ -38,11 +38,11 @@ func (m Message) sendMessage(message string) {
 
     /* TODO
     // https://stackoverflow.com/a/38362784/10788820
-    recipients := make([]mailjet.Recipient, len(m.config.targetEmails))
+    recipients := make([]mailjet.Recipient, len(m.config.TargetEmails))
     // https://stackoverflow.com/a/7782507/10788820
-    for index, _ := range m.config.targetEmails {
+    for index, _ := range m.config.TargetEmails {
         recipients[index] = mailjet.Recipient{
-            Email: m.config.targetEmails[index],
+            Email: m.config.TargetEmails[index],
         }
     }
 
@@ -54,7 +54,7 @@ func (m Message) sendMessage(message string) {
       Recipients: recipients,
     }
 
-    mailjetClient := mailjet.NewMailjetClient(m.config.Mailjet.publicApiKey, m.config.Mailjet.privateApiKey)
+    mailjetClient := mailjet.NewMailjetClient(m.config.Mailjet.PublicApiKey, m.config.Mailjet.PrivateApiKey)
 
     res, err := mailjetClient.SendMail(email)
     if err != nil {
