@@ -42,14 +42,12 @@ func (ds DoorSensor) Run() {
 	ds.isOpen = pin.Read() == rpio.Low
 	ds.printState()
 
-	pin.Detect(rpio.FallEdge) // enable falling edge event detection
-	pin.Detect(rpio.RiseEdge) // enable falling edge event detection
-
 	log.Print("Listening for door sensor")
 
 	for true {
-		if pin.EdgeDetected() { // check if event occurred
-			ds.isOpen = !ds.isOpen
+		currentlyOpen := pin.Read() == rpio.Low
+		if currentlyOpen != ds.isOpen {
+			ds.isOpen = currentlyOpen
 			ds.printState()
 			if (ds.isOpen) {
 				ds.onOpen()
@@ -61,8 +59,6 @@ func (ds DoorSensor) Run() {
 	}
 
 	log.Print("Done listening for door sensor")
-
-	pin.Detect(rpio.NoEdge) // disable edge event detection
 }
 
 func (ds DoorSensor) printState() {
