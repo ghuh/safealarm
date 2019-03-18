@@ -29,4 +29,9 @@ The build artifact will be called `safealarm` and will be in the current directo
 
 ##Run
 
-`./safealarm config.yaml`
+`sudo` is required in order for edge detection to work.  If omitted it will freeze the whole pi on first edge detected and require a hard restart of the raspberry pi.
+
+```bash
+sudo ./safealarm config.yaml
+```
+
