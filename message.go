@@ -4,6 +4,7 @@ import (
     "log"
 )
 
+// https://github.com/mailjet/mailjet-apiv3-go
 // https://icyapril.com/go/programming/2017/12/17/object-orientation-in-go.html
 // For Verizon, send  to <number>@vtext.com to text a phone number
 
