@@ -14,6 +14,9 @@ import (
 type DoorSensor struct {
 	onOpen func()
 	onClose func()
+	onForgot func()
+	doorOpenWaitDuration time.Duration
+
 	isOpen bool
 }
 
@@ -22,8 +25,9 @@ var (
 	pin = rpio.Pin(22)
 )
 
-func NewDoorSensor(onOpen func(), onClose func()) DoorSensor {
-	doorSensor := DoorSensor{onOpen, onClose, false}
+func NewDoorSensor( onOpen func(), onClose func(), onForgot func(), doorOpenWaitSeconds int32 ) DoorSensor {
+	doorOpenWaitDuration, _ := time.ParseDuration(string(doorOpenWaitSeconds) + "s")
+	doorSensor := DoorSensor{onOpen, onClose, onForgot, doorOpenWaitDuration, false}
 	return doorSensor
 }
 
@@ -44,17 +48,35 @@ func (ds DoorSensor) Run() {
 
 	log.Print("Listening for door sensor")
 
+	currentForgotTime := new(time.Time)
+
 	for true {
+		// Get new state of sensor
 		currentlyOpen := pin.Read() == rpio.Low
+
+		// Send forgot alarm if open for too long
+		if currentForgotTime != nil && time.Now().After(*currentForgotTime) {
+			currentForgotTime = nil
+			ds.onForgot()
+		}
+
+		// Check if state has changed
 		if currentlyOpen != ds.isOpen {
 			ds.isOpen = currentlyOpen
 			ds.printState()
 			if (ds.isOpen) {
+				// Need to get reference
+				newForgotTime := time.Now().Add(ds.doorOpenWaitDuration)
+				currentForgotTime = &newForgotTime
+
 				ds.onOpen()
 			} else {
+				currentForgotTime = nil
 				ds.onClose()
 			}
 		}
+
+		// Sleep half second before next loop
 		time.Sleep(time.Second / 2)
 	}
 

@@ -15,7 +15,7 @@ func main() {
 
     message := NewMessage(config)
 
-    doorSensor := NewDoorSensor(message.SendOpen, message.SendClosed)
+    doorSensor := NewDoorSensor( message.SendOpen, message.SendClosed, message.SendForgot, config.DoorOpenWaitSeconds)
     doorSensor.Run()
 
     log.Print("EXITING")
