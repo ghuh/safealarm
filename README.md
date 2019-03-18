@@ -12,7 +12,7 @@ Event messages can be sent to email addresses using the [mailjet](https://www.ma
 
 To send text messages to verizon customers, set email to `<phone number>@@vtext.com`.
 
-By default, mailjet rate limits to 10 messages an hour.  Sending to multiple emails does not count more against this limit.  Purely the number of times openend or left open.
+By default (i.e. for free), mailjet rate limits to 10/hour, 200/day, 6000/month.  Sending to multiple emails does not count more against this limit.  Purely the number of times opened or left open. The 10/hour can be lifted for free by verifying your identity.
 
 ##Config
 
