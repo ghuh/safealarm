@@ -38,7 +38,8 @@ func getYamlFileContents(configFilePath string) []byte {
 func getConfigObject(configFileContents []byte) Config {
     config := Config{}
 
-    err := yaml.Unmarshal(configFileContents, &config)
+    // https://godoc.org/gopkg.in/yaml.v2#UnmarshalStrict
+    err := yaml.UnmarshalStrict(configFileContents, &config)
 
     if err != nil {
     	log.Fatalf("Error parsing config file YAML: %v", err)
