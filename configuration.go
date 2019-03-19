@@ -10,7 +10,7 @@ import (
 
 type Config struct {
     TargetEmails []string `yaml:"targetEmails"`
-    DoorOpenWaitSeconds int32 `yaml:"doorOpenWaitSeconds"`
+    DoorOpenWaitSeconds int `yaml:"doorOpenWaitSeconds"`
     Mailjet struct {
         PublicApiKey string `yaml:"publicApiKey"`
         PrivateApiKey string `yaml:"privateApiKey"`

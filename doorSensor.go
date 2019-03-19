@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/stianeikeland/go-rpio"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -25,8 +26,8 @@ var (
 	pin = rpio.Pin(22)
 )
 
-func NewDoorSensor( onOpen func(), onClose func(), onForgot func(), doorOpenWaitSeconds int32 ) DoorSensor {
-	doorOpenWaitDuration, _ := time.ParseDuration(string(doorOpenWaitSeconds) + "s")
+func NewDoorSensor( onOpen func(), onClose func(), onForgot func(), doorOpenWaitSeconds int ) DoorSensor {
+	doorOpenWaitDuration, _ := time.ParseDuration(strconv.Itoa(doorOpenWaitSeconds) + "s")
 	doorSensor := DoorSensor{onOpen, onClose, onForgot, doorOpenWaitDuration, false}
 	return doorSensor
 }
@@ -49,6 +50,7 @@ func (ds DoorSensor) Run() {
 	log.Print("Listening for door sensor")
 
 	currentForgotTime := new(time.Time)
+	currentForgotTime = nil
 
 	for true {
 		// Get new state of sensor
