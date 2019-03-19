@@ -45,13 +45,16 @@ func (ds DoorSensor) Run() {
 	// Unmap gpio memory when done
 	defer rpio.Close()
 
+	// Initialize pin to read
 	pin.Input()
 
+	// Get initial sensor state and print
 	ds.isOpen = pin.Read() == rpio.Low
 	ds.printState()
 
 	log.Print("Listening for door sensor")
 
+	// Set initial state for the door open message
 	currentForgotTime := new(time.Time)
 	if ds.isOpen {
 		// Since the door was open when the system started, make sure it closes or send a message
@@ -61,6 +64,7 @@ func (ds DoorSensor) Run() {
 		currentForgotTime = nil
 	}
 
+	// Loop forever listing for changes in the sensor state
 	for true {
 		// Get new state of sensor
 		currentlyOpen := pin.Read() == rpio.Low
