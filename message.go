@@ -17,6 +17,10 @@ func NewMessage(config Config) Message {
     return message
 }
 
+func (m Message) SendStarting() {
+    m.sendMessage("Safe Alarm Powering Up")
+}
+
 func (m Message) SendOpen() {
     m.sendMessage("Safe Open")
 }
