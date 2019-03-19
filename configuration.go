@@ -6,8 +6,9 @@ import (
     "log"
 )
 
-// https://stackoverflow.com/questions/28682439/go-parse-yaml-file
+// Example that was followed: https://stackoverflow.com/questions/28682439/go-parse-yaml-file
 
+// Config is an object holds all the data from the config file.
 type Config struct {
     TargetEmails []string `yaml:"targetEmails"`
     DoorOpenWaitSeconds int `yaml:"doorOpenWaitSeconds"`
@@ -17,6 +18,7 @@ type Config struct {
     } `yaml:"mailjet"`
 }
 
+// NewConfiguration creates a new config object from the given file.
 func NewConfiguration(configFilePath string) Config {
     config := getConfigObject(getYamlFileContents(configFilePath))
 
@@ -25,6 +27,7 @@ func NewConfiguration(configFilePath string) Config {
     return config
 }
 
+// getYamlFileContents slurps in the contents of the given file and returns as a byte array.
 func getYamlFileContents(configFilePath string) []byte {
     yamlFileContents, err := ioutil.ReadFile(configFilePath)
 
@@ -36,6 +39,7 @@ func getYamlFileContents(configFilePath string) []byte {
     return yamlFileContents;
 }
 
+// getConfigObject converts the byte array of a YAML config file into a Config object and returns it.
 func getConfigObject(configFileContents []byte) Config {
     config := Config{}
 
