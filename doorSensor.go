@@ -51,7 +51,13 @@ func (ds DoorSensor) Run() {
 	log.Print("Listening for door sensor")
 
 	currentForgotTime := new(time.Time)
-	currentForgotTime = nil
+	if ds.isOpen {
+		// Since the door was open when the system started, make sure it closes or send a message
+		newForgotTime := time.Now().Add(ds.doorOpenWaitDuration)
+		currentForgotTime = &newForgotTime // Need to get reference
+	} else {
+		currentForgotTime = nil
+	}
 
 	for true {
 		// Get new state of sensor
@@ -68,9 +74,8 @@ func (ds DoorSensor) Run() {
 			ds.isOpen = currentlyOpen
 			ds.printState()
 			if (ds.isOpen) {
-				// Need to get reference
 				newForgotTime := time.Now().Add(ds.doorOpenWaitDuration)
-				currentForgotTime = &newForgotTime
+				currentForgotTime = &newForgotTime // Need to get reference
 
 				ds.onOpen()
 			} else {
