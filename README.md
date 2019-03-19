@@ -37,3 +37,6 @@ Build instructions came from example [here](https://www.thepolyglotdeveloper.com
 
 Note that `sudo` is not required currently, but it would be in order for edge detection to work.  If omitted it will freeze the whole pi on first edge detected and require a hard restart of the raspberry pi.
 
+##Hardware
+
+This code was originally written for the Raspberry Pi Model A and [Gikfun MC-38 Wired Door Sensor Magnetic Switch](https://www.amazon.com/gp/product/B0154PTDFI)
