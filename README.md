@@ -27,8 +27,6 @@ GOOS=linux GOARCH=arm GOARM=5 go build
 
 The build artifact will be called `safealarm` and will be in the current directory. SCP it to the raspberry pi.
 
-Build instructions came from example [here](https://www.thepolyglotdeveloper.com/2017/04/cross-compiling-golang-applications-raspberry-pi/).
-
 ##Run
 
 ```bash
@@ -40,3 +38,17 @@ Note that `sudo` is not required currently, but it would be in order for edge de
 ##Hardware
 
 This code was originally written for the Raspberry Pi Model A and [Gikfun MC-38 Wired Door Sensor Magnetic Switch](https://www.amazon.com/gp/product/B0154PTDFI)
+
+##Reference
+
+Go Resources
+- Basics of building and running go: https://golang.org/doc/code.html
+- Go CLI: https://golang.org/cmd/go/
+- Language Primer: https://golang.org/doc/effective_go.html
+- Base libraries: https://golang.org/pkg/
+- Excellent Language Reference: https://www.golang-book.com/books/intro
+- Go Modules: https://github.com/golang/go/wiki/Modules#how-to-install-and-activate-module-support
+
+Raspberry Pi
+- Library used to access GPIO from Go: https://github.com/stianeikeland/go-rpio
+- Build instructions to cross compile Go for the Pi: https://www.thepolyglotdeveloper.com/2017/04/cross-compiling-golang-applications-raspberry-pi/
