@@ -27,6 +27,8 @@ GOOS=linux GOARCH=arm GOARM=5 go build
 
 The build artifact will be called `safealarm` and will be in the current directory. SCP it to the raspberry pi.
 
+Build instructions came from example [here](https://www.thepolyglotdeveloper.com/2017/04/cross-compiling-golang-applications-raspberry-pi/).
+
 ##Run
 
 ```bash
