@@ -26,6 +26,8 @@ var (
 
 // NewDoorSensor creates a new DoorSensor object that you Run() and then it'll fire callbacks on events to the door.
 func NewDoorSensor( onOpen func(), onClose func(), onForgot func(), doorOpenWaitSeconds int ) DoorSensor {
+	// https://www.calhoun.io/6-tips-for-using-strings-in-go/
+	// https://www.ardanlabs.com/blog/2013/06/gos-duration-type-unravelled.html
 	doorOpenWaitDuration, _ := time.ParseDuration(strconv.Itoa(doorOpenWaitSeconds) + "s")
 	doorSensor := DoorSensor{onOpen, onClose, onForgot, doorOpenWaitDuration, false}
 	return doorSensor
