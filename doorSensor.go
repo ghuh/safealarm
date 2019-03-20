@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/stianeikeland/go-rpio"
+	"github.com/stianeikeland/go-rpio/v4"
 	"log"
 	"strconv"
 	"time"
