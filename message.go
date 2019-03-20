@@ -1,6 +1,7 @@
 package main
 
 import (
+    "github.com/mailjet/mailjet-apiv3-go"
     "log"
 )
 
@@ -48,7 +49,6 @@ func (m Message) Heartbeat() {
 func (m Message) sendMessage(message string) {
     log.Printf("Sending message [ %v ]", message)
 
-    /* TODO
     // https://stackoverflow.com/a/38362784/10788820
     recipients := make([]mailjet.Recipient, len(m.config.TargetEmails))
     // https://stackoverflow.com/a/7782507/10788820
@@ -74,5 +74,4 @@ func (m Message) sendMessage(message string) {
     } else {
         log.Printf("Successfully sent message: %v", res)
     }
-    */
 }
