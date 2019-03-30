@@ -16,7 +16,7 @@ func main() {
     message := NewMessage(config)
     message.SendStarting() // Send text message that the Pi is powering up
 
-    doorSensor := NewDoorSensor( message.SendOpen, message.SendClosed, message.SendForgot, config.DoorOpenWaitSeconds)
+    doorSensor := NewDoorSensor(message.SendOpen, message.SendClosed, message.SendForgot, config.DoorOpenWaitSeconds)
     doorSensor.Run()
 
     log.Print("EXITING")

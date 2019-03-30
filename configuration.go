@@ -10,10 +10,10 @@ import (
 
 // Config is an object holds all the data from the config file.
 type Config struct {
-    TargetEmails []string `yaml:"targetEmails"`
-    DoorOpenWaitSeconds int `yaml:"doorOpenWaitSeconds"`
-    Mailjet struct {
-        PublicApiKey string `yaml:"publicApiKey"`
+    TargetEmails        []string `yaml:"targetEmails"`
+    DoorOpenWaitSeconds int      `yaml:"doorOpenWaitSeconds"`
+    Mailjet             struct {
+        PublicApiKey  string `yaml:"publicApiKey"`
         PrivateApiKey string `yaml:"privateApiKey"`
     } `yaml:"mailjet"`
 }
