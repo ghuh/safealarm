@@ -12,6 +12,8 @@ import (
 type Config struct {
     TargetEmails        []string `yaml:"targetEmails"`
     DoorOpenWaitSeconds int      `yaml:"doorOpenWaitSeconds"`
+    // <=0 for no heartbeat
+    HeartbeatSeconds    int      `yaml:"heartbeatSeconds"`
     Mailjet             struct {
         PublicApiKey  string `yaml:"publicApiKey"`
         PrivateApiKey string `yaml:"privateApiKey"`
@@ -33,7 +35,6 @@ func getYamlFileContents(configFilePath string) []byte {
 
     if err != nil {
         log.Fatalf("Error opening config file '%v': %v", configFilePath, err)
-        panic(err)
     }
 
     return yamlFileContents;

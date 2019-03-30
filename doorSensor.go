@@ -11,7 +11,9 @@ type DoorSensor struct {
     onOpen               func()
     onClose              func()
     onForgot             func()
+    onHeartbeat          func()
     doorOpenWaitDuration time.Duration
+    heartbeatSeconds     int
 
     isOpen bool
 }
@@ -25,11 +27,11 @@ var (
 )
 
 // NewDoorSensor creates a new DoorSensor object that you Run() and then it'll fire callbacks on events to the door.
-func NewDoorSensor(onOpen func(), onClose func(), onForgot func(), doorOpenWaitSeconds int) DoorSensor {
+func NewDoorSensor(onOpen func(), onClose func(), onForgot func(), onHeartbeat func(), doorOpenWaitSeconds int, heartbeatSeconds int) DoorSensor {
     // https://www.calhoun.io/6-tips-for-using-strings-in-go/
     // https://www.ardanlabs.com/blog/2013/06/gos-duration-type-unravelled.html
     doorOpenWaitDuration, _ := time.ParseDuration(strconv.Itoa(doorOpenWaitSeconds) + "s")
-    doorSensor := DoorSensor{onOpen, onClose, onForgot, doorOpenWaitDuration, false}
+    doorSensor := DoorSensor{onOpen, onClose, onForgot, onHeartbeat, doorOpenWaitDuration, heartbeatSeconds, false}
     return doorSensor
 }
 
@@ -64,6 +66,15 @@ func (ds DoorSensor) Run() {
         currentForgotTime = nil
     }
 
+    // Set up heartbeat
+    var nextHeartbeatTime time.Time
+    if ds.heartbeatSeconds > 0 {
+        nextHeartbeatTime = ds.getNextHeartbeatTime()
+        log.Printf("Heartbeat every %v seconds", ds.heartbeatSeconds)
+    } else {
+        log.Print("Heartbeat disabled")
+    }
+
     // Loop forever listing for changes in the sensor state
     for true {
         // Get new state of sensor
@@ -90,11 +101,22 @@ func (ds DoorSensor) Run() {
             }
         }
 
+        // Send heartbeat
+        if ds.heartbeatSeconds > 0 && time.Now().After(nextHeartbeatTime) {
+            ds.onHeartbeat()
+            nextHeartbeatTime = ds.getNextHeartbeatTime()
+        }
+
         // Sleep half second before next loop
         time.Sleep(time.Second / 2)
     }
 
     log.Print("Done listening for door sensor")
+}
+
+func (ds DoorSensor) getNextHeartbeatTime() time.Time {
+    heartbeatDuration, _ := time.ParseDuration(strconv.Itoa(ds.heartbeatSeconds) + "s")
+    return time.Now().Add(heartbeatDuration)
 }
 
 // printState prints the current open/closed state of the door
