@@ -114,6 +114,7 @@ func (ds DoorSensor) Run() {
     log.Print("Done listening for door sensor")
 }
 
+// getNextHeartbeatTime returns the next time a heartbeat message should be sent
 func (ds DoorSensor) getNextHeartbeatTime() time.Time {
     heartbeatDuration, _ := time.ParseDuration(strconv.Itoa(ds.heartbeatSeconds) + "s")
     return time.Now().Add(heartbeatDuration)
