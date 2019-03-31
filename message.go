@@ -1,11 +1,14 @@
 package main
 
 import (
+    "github.com/mailjet/mailjet-apiv3-go"
     "log"
 )
 
 // https://icyapril.com/go/programming/2017/12/17/object-orientation-in-go.html
 // For Verizon, send  to <number>@vtext.com to text a phone number
+
+const numRetries int = 1
 
 type Message struct {
     config Config
@@ -48,7 +51,6 @@ func (m Message) Heartbeat() {
 func (m Message) sendMessage(message string) {
     log.Printf("Sending message [ %v ]", message)
 
-    /* TODO
     // https://stackoverflow.com/a/38362784/10788820
     recipients := make([]mailjet.Recipient, len(m.config.TargetEmails))
     // https://stackoverflow.com/a/7782507/10788820
@@ -68,11 +70,19 @@ func (m Message) sendMessage(message string) {
 
     mailjetClient := mailjet.NewMailjetClient(m.config.Mailjet.PublicApiKey, m.config.Mailjet.PrivateApiKey)
 
-    res, err := mailjetClient.SendMail(email)
-    if err != nil {
-        log.Printf("Error sending message: %v", err)
-    } else {
-        log.Printf("Successfully sent message: %v", res)
+    i := 0
+    for i <= numRetries {
+        res, err := mailjetClient.SendMail(email)
+        if err != nil {
+            log.Printf("Error sending message: %v", err)
+        } else {
+            log.Printf("Successfully sent message: %v", res)
+            break;
+        }
+        i++
+
+        if i < numRetries {
+            log.Print("Retrying sending message")
+        }
     }
-    */
 }
