@@ -6,6 +6,10 @@ Simple program intended to be run on a raspberry pi to detect when a sensor is o
 
 It will also send a heartbeat at a configurable time.
 
+I installed the sensor on the door to a Safe, but it certainly could be applied to other applications.
+
+Why is this project written in Go? Well mostly because I wanted to try out a new language.  This is my first Go program so be Gentle ;)
+
 ## Messages
 
 Event messages can be sent to email addresses using [mailjet](https://www.mailjet.com/). All messages will be sent to all emails specified in the config file.
