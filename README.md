@@ -1,6 +1,6 @@
-#Safe Alarm
+# Safe Alarm
 
-##Introduction
+## Introduction
 
 Simple program intended to be run on a raspberry pi to detect when a sensor is open or closed. It will send an email on open, or if left open for a configurable period of time.
 
@@ -18,11 +18,11 @@ To send text messages to verizon customers, set email to `<phone number>@@vtext.
 
 By default (i.e. for free), mailjet rate limits to 10/hour, 200/day, 6000/month.  Sending to multiple emails in a single message still counts as multiple against the rate limit. The 10/hour can be lifted for free by verifying your identity.
 
-##Config
+## Config
 
 Configuration is done via a YAML file passed in as the first command line arguement.
 
-##Build
+## Build
 
 ```bash
 # cd to the project dir
@@ -31,7 +31,7 @@ GOOS=linux GOARCH=arm GOARM=5 go build
 
 The build artifact will be called `safealarm` and will be in the current directory. SCP it to the raspberry pi.
 
-##Run
+## Run
 
 ```bash
 ./safealarm config.yaml
@@ -39,11 +39,11 @@ The build artifact will be called `safealarm` and will be in the current directo
 
 Note that `sudo` is not required currently, but it would be in order for edge detection to work.  If omitted it will freeze the whole pi on first edge detected and require a hard restart of the raspberry pi.
 
-##Hardware
+## Hardware
 
 This code was originally written for the Raspberry Pi Model A and [Gikfun MC-38 Wired Door Sensor Magnetic Switch](https://www.amazon.com/gp/product/B0154PTDFI)
 
-##Reference
+## Reference
 
 Go Resources
 - Basics of building and running go: https://golang.org/doc/code.html
