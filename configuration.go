@@ -13,8 +13,10 @@ type Config struct {
     TargetEmails        []string `yaml:"targetEmails"`
     DoorOpenWaitSeconds int      `yaml:"doorOpenWaitSeconds"`
     // <=0 for no heartbeat
-    HeartbeatSeconds    int      `yaml:"heartbeatSeconds"`
-    Mailjet             struct {
+    HeartbeatSeconds int    `yaml:"heartbeatSeconds"`
+    FromEmail        string `yaml:"fromEmail"`
+    FromName         string `yaml:"fromName"`
+    Mailjet          struct {
         PublicApiKey  string `yaml:"publicApiKey"`
         PrivateApiKey string `yaml:"privateApiKey"`
     } `yaml:"mailjet"`

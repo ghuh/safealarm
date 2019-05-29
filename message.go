@@ -61,8 +61,8 @@ func (m Message) sendMessage(message string) {
     }
 
     email := &mailjet.InfoSendMail {
-      FromEmail: "kphayen@gmail.com",
-      FromName: "Kevin Hayen",
+      FromEmail: m.config.FromEmail,
+      FromName: m.config.FromName,
       Subject: "",
       TextPart: message,
       Recipients: recipients,
