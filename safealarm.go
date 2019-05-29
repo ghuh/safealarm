@@ -18,7 +18,7 @@ func main() {
 
     doorSensor := NewDoorSensor(
         message.SendOpen,
-        func() {}, // Don't send a message on door close because it just wastes quota.  Also, a message will get printed in logs already.
+        message.SendClosed,
         message.SendForgot,
         message.Heartbeat,
         config.DoorOpenWaitSeconds,

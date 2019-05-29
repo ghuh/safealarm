@@ -65,6 +65,7 @@ func (ds DoorSensor) Run() {
     } else {
         currentForgotTime = nil
     }
+    var isForgotten bool = false
 
     // Set up heartbeat
     var nextHeartbeatTime time.Time
@@ -83,6 +84,7 @@ func (ds DoorSensor) Run() {
         // Send forgot alarm if open for too long
         if currentForgotTime != nil && time.Now().After(*currentForgotTime) {
             currentForgotTime = nil
+            isForgotten = true
             ds.onForgot()
         }
 
@@ -97,7 +99,11 @@ func (ds DoorSensor) Run() {
                 ds.onOpen()
             } else {
                 currentForgotTime = nil
-                ds.onClose()
+                // Only send the door closed message if it was forgotten open
+                if isForgotten {
+                    isForgotten = false
+                    ds.onClose()
+                }
             }
         }
 
