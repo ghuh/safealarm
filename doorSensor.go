@@ -7,8 +7,7 @@ import (
 )
 
 // DoorSensor Object
-type DoorSensor struct {
-}
+type DoorSensor struct{}
 
 // pin is the GPIO pin on the board that we are reading from.
 // Wire to 3.3 VDC Power and GPIO3 on P1 Pinout (26-pin Header)
@@ -31,6 +30,13 @@ func NewDoorSensor() DoorSensor {
 	pin.Input()
 
 	doorSensor := DoorSensor{}
+
+	if doorSensor.IsOpen() {
+		log.Print("Initial state is open")
+	} else {
+		log.Print("Initial state is closed")
+	}
+
 	return doorSensor
 }
 

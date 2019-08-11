@@ -11,7 +11,7 @@ import (
 func TestInitialOpen(t *testing.T) {
 	if !helper(
 		TestInitialOpenDoorSensor{},
-		false,
+		true,
 		false,
 		true,
 		false,
@@ -61,6 +61,36 @@ func TestHeartbeat(t *testing.T) {
 type TestInitialClosedDoorSensor struct{}
 
 func (ds TestInitialClosedDoorSensor) IsOpen() bool {
+	return false
+}
+
+// Test if the door starts open and then closes, there is no forgot message
+func TestDoorOpenThenClosed(t *testing.T) {
+	if !helper(
+		TestDoorOpenThenClosedSensor{},
+		true,
+		false,
+		false,
+		false,
+		1,
+		30,
+		1700) {
+		t.Error("Failed open then closed")
+	}
+}
+
+type TestDoorOpenThenClosedSensor struct{}
+
+var (
+	TestDoorOpenThenClosedSensorCount = 0
+)
+
+func (ds TestDoorOpenThenClosedSensor) IsOpen() bool {
+	TestDoorOpenThenClosedSensorCount++
+	// First check it will be open, then the second it will be closed
+	if TestDoorOpenThenClosedSensorCount == 1 {
+		return true
+	}
 	return false
 }
 

@@ -43,21 +43,9 @@ func NewDoorLogic(
 // Run starts the DoorLogic object listening.  It'll listen forever.
 // Modeled after this example: https://github.com/stianeikeland/go-rpio/blob/master/examples/event/event.go
 func (ds DoorLogic) Run() {
-	// Get initial sensor state and print
-	ds.isOpen = ds.doorSensor.IsOpen()
-	ds.printState()
-
 	log.Print("Listening for door sensor")
 
-	// Set initial state for the door open message
-	currentForgotTime := new(time.Time)
-	if ds.isOpen {
-		// Since the door was open when the system started, make sure it closes or send a message
-		newForgotTime := time.Now().Add(ds.doorOpenWaitDuration)
-		currentForgotTime = &newForgotTime // Need to get reference
-	} else {
-		currentForgotTime = nil
-	}
+	var currentForgotTime *time.Time
 	isForgotten := false
 
 	// Set up heartbeat
