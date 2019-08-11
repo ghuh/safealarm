@@ -94,6 +94,36 @@ func (ds TestDoorOpenThenClosedSensor) IsOpen() bool {
 	return false
 }
 
+// Test if the door starts open and then closes eventually, there should be an open, forgot, then closed message
+func TestDoorOpenThenSlowClosed(t *testing.T) {
+	if !helper(
+		TestDoorOpenThenSlowClosedSensor{},
+		true,
+		true,
+		true,
+		false,
+		1,
+		30,
+		1700) {
+		t.Error("Failed open then slow closed")
+	}
+}
+
+type TestDoorOpenThenSlowClosedSensor struct{}
+
+var (
+	TestDoorOpenThenSlowClosedSensorCount = 0
+)
+
+func (ds TestDoorOpenThenSlowClosedSensor) IsOpen() bool {
+	TestDoorOpenThenSlowClosedSensorCount++
+	// First check it will be open, then the second it will be closed
+	if TestDoorOpenThenSlowClosedSensorCount < 4 {
+		return true
+	}
+	return false
+}
+
 func helper(
 	doorSensor iDoorSensor,
 	expectOpen bool,
