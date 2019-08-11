@@ -22,6 +22,16 @@ By default (i.e. for free), mailjet rate limits to 10/hour, 200/day, 6000/month.
 
 Configuration is done via a YAML file passed in as the first command line arguement.
 
+## Test
+
+Run unit tests
+
+```bash
+go test
+```
+
+Since so much of this program is based on waiting for things to happend, the unit tests take some time to run.
+
 ## Build
 
 ```bash

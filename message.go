@@ -86,6 +86,7 @@ func (m Message) sendMessage(message string) {
 				log.Printf("Successfully sent message: %v", res)
 				return nil
 			},
-			-1)
+			-1,
+			1000) // Start backoff at 1 second otherwise there is an issue with the kernel not liking the amount of IO
 	}()
 }

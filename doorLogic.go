@@ -6,9 +6,13 @@ import (
 	"time"
 )
 
+type iDoorSensor interface {
+	IsOpen() bool
+}
+
 // DoorLogic object
 type DoorLogic struct {
-	doorSensor           DoorSensor
+	doorSensor           iDoorSensor
 	onOpen               func()
 	onClose              func()
 	onForgot             func()
@@ -21,7 +25,7 @@ type DoorLogic struct {
 
 // NewDoorLogic creates a new DoorLogic object that you Run() and then it'll fire callbacks on events to the door.
 func NewDoorLogic(
-	doorSensor DoorSensor,
+	doorSensor iDoorSensor,
 	onOpen func(),
 	onClose func(),
 	onForgot func(),
