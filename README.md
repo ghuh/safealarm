@@ -14,9 +14,13 @@ Why is this project written in Go? Well mostly because I wanted to try out a new
 
 Event messages can be sent to email addresses using [mailjet](https://www.mailjet.com/). All messages will be sent to all emails specified in the config file.
 
-To send text messages to verizon customers, set email to `<phone number>@@vtext.com`. https://www.verizon.com/about/news/vzw/2013/06/computer-to-phone-text-messaging
-
 By default (i.e. for free), mailjet rate limits to 10/hour, 200/day, 6000/month.  Sending to multiple emails in a single message still counts as multiple against the rate limit. The 10/hour can be lifted for free by verifying your identity.
+
+### Text Messages
+
+To send text messages to Verizon customers, set email to `<phone number>@vtext.com`. https://www.verizon.com/about/news/vzw/2013/06/computer-to-phone-text-messaging
+
+To send text messages to Google Fi customers, set email to `<phone number>@msg.fi.google.com`. https://support.google.com/fi/answer/6356597
 
 ## Config
 
