@@ -18,7 +18,7 @@ By default (i.e. for free), mailjet rate limits to 10/hour, 200/day, 6000/month.
 
 ### Text Messages
 
-To send text messages to Verizon customers, set email to `<phone number>@vtext.com`. https://www.verizon.com/about/news/vzw/2013/06/computer-to-phone-text-messaging
+To send text messages to Verizon or Xfinity Mobile customers, set email to `<phone number>@vtext.com`. https://www.verizon.com/about/news/vzw/2013/06/computer-to-phone-text-messaging
 
 To send text messages to Google Fi customers, set email to `<phone number>@msg.fi.google.com`. https://support.google.com/fi/answer/6356597
 
