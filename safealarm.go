@@ -18,13 +18,20 @@ func main() {
 
 	doorLogic := NewDoorLogic(
 		NewDoorSensor(),
-		message.SendOpen,
-		message.SendClosed,
-		message.SendForgot,
+		getIfEnabled(config.EnableDoorOpen, message.SendOpen),
+		getIfEnabled(config.EnableDoorClosed, message.SendClosed),
+		getIfEnabled(config.EnableDoorLeftOpen, message.SendForgot),
 		message.Heartbeat,
 		config.DoorOpenWaitSeconds,
 		config.HeartbeatSeconds)
 	doorLogic.Run()
 
 	log.Print("EXITING")
+}
+
+func getIfEnabled(isEnabled bool, funcPtr func()) func() {
+    if isEnabled {
+        return funcPtr
+    }
+    return func() {}
 }

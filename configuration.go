@@ -16,6 +16,9 @@ type Config struct {
     HeartbeatSeconds int    `yaml:"heartbeatSeconds"`
     FromEmail        string `yaml:"fromEmail"`
     FromName         string `yaml:"fromName"`
+    EnableDoorOpen   bool `yaml:"enableDoorOpen"`
+    EnableDoorClosed   bool `yaml:"enableDoorClosed"`
+    EnableDoorLeftOpen   bool `yaml:"enableDoorLeftOpen"`
     Mailjet          struct {
         PublicApiKey  string `yaml:"publicApiKey"`
         PrivateApiKey string `yaml:"privateApiKey"`
