@@ -1,7 +1,7 @@
 package main
 
 import (
-    "gopkg.in/yaml.v2"
+    "gopkg.in/yaml.v3"
     "io/ioutil"
     "log"
 )
@@ -50,8 +50,7 @@ func getConfigObject(configFileContents []byte) Config {
     config := Config{}
 
     // https://godoc.org/gopkg.in/yaml.v2#UnmarshalStrict
-    err := yaml.UnmarshalStrict(configFileContents, &config)
-
+    var err = yaml.Unmarshal(configFileContents, &config)
     if err != nil {
         log.Fatalf("Error parsing config file YAML: %v", err)
     }
