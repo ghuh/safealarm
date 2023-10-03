@@ -1,3 +1,5 @@
+**[DEPRECATED]**
+
 # Safe Alarm
 
 ## Introduction
@@ -24,7 +26,7 @@ To send text messages to Google Fi customers, set email to `<phone number>@msg.f
 
 ## Config
 
-Configuration is done via a YAML file passed in as the first command line arguement.
+Configuration is done via a YAML file passed in as the first command line argument.
 
 ## Test
 
@@ -34,7 +36,7 @@ Run unit tests
 go test
 ```
 
-Since so much of this program is based on waiting for things to happend, the unit tests take some time to run.
+Since so much of this program is based on waiting for things to happened, the unit tests take some time to run.
 
 ## Build
 
